@@ -1,0 +1,6 @@
+# Ignore plugin installations managed by vim-plug
+plugged/
+
+# Ignore other temporary/cache files
+*.log
+.DS_Store
