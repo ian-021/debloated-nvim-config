@@ -4,9 +4,13 @@ vim.opt.tabstop = 2
 vim.opt.swapfile = false
 vim.opt.wrap = false
 vim.opt.clipboard = "unnamedplus"
+vim.g.mapleader = " "
 
 vim.opt.termguicolors = true
 vim.opt.background = "dark"
+
+-- Keep block cursor in insert mode
+vim.opt.guicursor = "n-v-c:block,i-ci-ve:block,r-cr:hor20,o:hor50"
 
 vim.opt.list = true
 vim.opt.listchars = {
@@ -42,8 +46,11 @@ Plug 'folke/flash.nvim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-tree/nvim-tree.lua'
 Plug 'nvim-tree/nvim-web-devicons'
+Plug 'folke/todo-comments.nvim'
+Plug 'folke/which-key.nvim'
 call plug#end()
 ]])
+
 
 -- Telescope setup
 require('telescope').setup{}
