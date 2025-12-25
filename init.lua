@@ -3,6 +3,7 @@ vim.opt.relativenumber = true
 vim.opt.tabstop = 2
 vim.opt.swapfile = false
 vim.opt.wrap = false
+vim.opt.clipboard = "unnamedplus"
 
 vim.opt.termguicolors = true
 vim.opt.background = "dark"
