@@ -59,6 +59,9 @@ keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "Live gre
 keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>", { desc = "Find buffers" })
 keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = "Help tags" })
 
+-- nvim-tree
+keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<cr>", { desc = "Toggle file explorer" })
+
 -- Clear search
 keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 

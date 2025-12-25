@@ -28,32 +28,53 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'folke/flash.nvim'
 Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-tree/nvim-tree.lua'
+Plug 'nvim-tree/nvim-web-devicons'
 call plug#end()
 ]])
 
 -- Telescope setup
 require('telescope').setup{}
 
--- LSP setup (only load if lspconfig is available)
-local ok, lspconfig = pcall(require, 'lspconfig')
-if ok then
-  -- Common LSP keybinds
-  vim.api.nvim_create_autocmd('LspAttach', {
-    group = vim.api.nvim_create_augroup('UserLspConfig', {}),
-    callback = function(ev)
-      local opts = { buffer = ev.buf }
-      vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-      vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-      vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
-      vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
-    end,
+-- nvim-tree setup
+local ok_tree, nvim_tree = pcall(require, 'nvim-tree')
+if ok_tree then
+  nvim_tree.setup({
+    disable_netrw = false,
+    hijack_netrw = false,
+    view = {
+      width = 30,
+      side = "left",
+    },
+    renderer = {
+      icons = {
+        show = {
+          file = false,
+          folder = false,
+          folder_arrow = false,
+          git = false,
+        },
+      },
+    },
   })
-
-  -- Enable common language servers (install with your system package manager)
-  local servers = { 'lua_ls', 'pyright', 'ts_ls' }
-  for _, lsp in ipairs(servers) do
-    lspconfig[lsp].setup({})
-  end
 end
+
+-- LSP setup using vim.lsp.config (Neovim 0.11+)
+-- Common LSP keybinds
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+  callback = function(ev)
+    local opts = { buffer = ev.buf }
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
+    vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
+  end,
+})
+
+-- Enable common language servers using vim.lsp.config
+vim.lsp.config.lua_ls = {}
+vim.lsp.config.pyright = {}
+vim.lsp.config.ts_ls = {}
 
 require("keymaps")
