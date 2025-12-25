@@ -8,6 +8,16 @@ vim.opt.clipboard = "unnamedplus"
 vim.opt.termguicolors = true
 vim.opt.background = "dark"
 
+vim.opt.list = true
+vim.opt.listchars = {
+  space = "·",
+  tab = "→ ",
+  trail = "·",
+  extends = "»",
+  precedes = "«",
+}
+
+
 vim.cmd([[
   highlight Normal guifg=#00ff00 guibg=#000000
   highlight Comment guifg=#008800 guibg=NONE
@@ -27,6 +37,7 @@ vim.cmd([[
 call plug#begin()
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
+Plug 'tpope/vim-surround'
 Plug 'folke/flash.nvim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-tree/nvim-tree.lua'
